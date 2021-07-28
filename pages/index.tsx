@@ -1,7 +1,4 @@
 import React from "react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import {
   StylesProvider,
   jssPreset,
@@ -12,7 +9,7 @@ import jssExtend from "jss-plugin-extend";
 import { Provider } from "react-redux";
 import {} from "next/router";
 import store from "../redux/store";
-import { useEffect } from "react";
+import { AppTheme } from "../components/theme";
 
 // const history = propsHistory.createBrowserHistory();
 
@@ -29,7 +26,9 @@ export default function Home() {
   return (
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <Provider store={store}>
-        <div>{state.message}</div>
+        <AppTheme>
+          <div>{state.message}</div>
+        </AppTheme>
       </Provider>
     </StylesProvider>
   );

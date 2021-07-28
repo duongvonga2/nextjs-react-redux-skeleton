@@ -1,8 +1,10 @@
+
 import { createAction } from "../common";
-import authApi from "./auth.api";
+import discussionApi from "./discussion.api";
 
 export const Types = {
-  setState: "auth.setState",
+  setState: "discussion.setState",
 };
 
 export default {};
+

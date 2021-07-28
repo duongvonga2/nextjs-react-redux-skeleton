@@ -2,7 +2,7 @@ import { IAuthState } from "./auth.interface";
 
 const authInitialState: IAuthState = {
   isFetching: false,
-  message: "x0sdsdasd",
+  message: "",
   isLogin: false,
   userInfo: {},
 };
