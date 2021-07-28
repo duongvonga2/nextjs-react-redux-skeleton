@@ -10,7 +10,7 @@ const lightText = {
   disabled: "rgb(149, 156, 169)",
 };
 
-const state: any = {
+const state = {
   palette: {
     type: "light",
     text: lightText,
@@ -39,8 +39,9 @@ const state: any = {
     fontFamily: ["Roboto", '"Helvetica"', "Arial", "sans-serif"].join(","),
   },
 };
+export type ITheme = typeof state;
 
-const mainTheme = createTheme(state);
+const mainTheme = createTheme(state as any);
 
 export const AppTheme = (props: any) => {
   return <ThemeProvider theme={mainTheme}>{props.children}</ThemeProvider>;

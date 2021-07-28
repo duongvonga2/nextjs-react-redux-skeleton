@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import {} from "next/router";
 import store from "../redux/store";
 import { AppTheme } from "../components/theme";
+import Layout from "./layout/Layout";
 
 // const history = propsHistory.createBrowserHistory();
 
@@ -27,7 +28,7 @@ export default function Home() {
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <Provider store={store}>
         <AppTheme>
-          <div>{state.message}</div>
+          <Layout></Layout>
         </AppTheme>
       </Provider>
     </StylesProvider>

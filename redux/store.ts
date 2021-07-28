@@ -16,5 +16,7 @@ const rootReducer = combineReducers({
   tag: tagReducer,
 });
 
+export type IRootState = ReturnType<typeof rootReducer>;
+
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 export default store;
