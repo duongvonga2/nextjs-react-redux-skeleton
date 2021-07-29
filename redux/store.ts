@@ -6,6 +6,7 @@ import categoryReducer from "./category/category.reducer";
 import commentReducer from "./comment/comment.reducer";
 import userReducer from "./user/user.reducer";
 import tagReducer from "./tag/tag.reducer";
+import pageReducer from "./page/page.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   comment: commentReducer,
   user: userReducer,
   tag: tagReducer,
+  page: pageReducer,
 });
 
 export type IRootState = ReturnType<typeof rootReducer>;

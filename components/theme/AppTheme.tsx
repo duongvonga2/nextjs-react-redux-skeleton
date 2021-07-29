@@ -37,6 +37,7 @@ const state = {
   },
   typography: {
     fontFamily: ["Roboto", '"Helvetica"', "Arial", "sans-serif"].join(","),
+    fontSize: 12,
   },
 };
 export type ITheme = typeof state;

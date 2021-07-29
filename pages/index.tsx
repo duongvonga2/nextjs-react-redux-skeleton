@@ -22,8 +22,6 @@ const jss = create({
 
 const generateClassName = createGenerateClassName();
 export default function Home() {
-  const state = store.getState().auth;
-
   return (
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <Provider store={store}>
