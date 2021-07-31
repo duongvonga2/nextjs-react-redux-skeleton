@@ -15,19 +15,23 @@ import {
   AccountCircle,
   MoreVert as MoreIcon,
 } from "@material-ui/icons";
+import { themeBreakpointsDown } from "../theme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "flex",
+      display: "flex",
+      // [theme.breakpoints.down("sm")]: {
+      //   display: "none",
+      // },
+      [themeBreakpointsDown["sm"]]: {
+        display: "none",
       },
     },
     sectionMobile: {
-      display: "flex",
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      display: "none",
+      [themeBreakpointsDown["sm"]]: {
+        display: "flex",
       },
     },
   })

@@ -7,7 +7,7 @@ export const themeBreakpointsUp = {
 };
 
 export const themeBreakpointsDown = {
-  xs: "(max-width:599.95px) ",
+  xs: "@media (max-width:599.95px) ",
   sm: "@media (max-width:959.95px) ",
   md: "@media (max-width:1279.95px) ",
   lg: "@media (max-width:1919.95px) ",

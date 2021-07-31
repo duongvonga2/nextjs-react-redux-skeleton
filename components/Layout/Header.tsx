@@ -11,8 +11,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import UnAuthHeader from "./UnAuthHeader";
 import pageAction from "../../redux/page/page.action";
 import { connect, ConnectedProps } from "react-redux";
-import { IRootState } from "../../redux";
+import { IRootState, wrapper } from "../../redux";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { themeBreakpointsDown } from "../theme";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,15 +35,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      display: "block",
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      display: "none",
+      [themeBreakpointsDown["sm"]]: {
+        display: "block",
       },
     },
     title: {
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block",
+      display: "block",
+      [themeBreakpointsDown["sm"]]: {
+        display: "none",
       },
     },
     search: {
@@ -53,11 +54,15 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
       marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(3),
-        width: "auto",
+      marginLeft: theme.spacing(3),
+      width: "auto",
+      // [theme.breakpoints.up("sm")]: {
+      //   marginLeft: theme.spacing(3),
+      //   width: "auto",
+      // },
+      [themeBreakpointsDown["sm"]]: {
+        marginLeft: 0,
+        width: "100%",
       },
     },
     searchIcon: {
@@ -77,9 +82,13 @@ const useStyles = makeStyles((theme: Theme) =>
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
+      // width: "100%",
+      // [theme.breakpoints.up("md")]: {
+      //   width: "20ch",
+      // },
+      width: "20ch",
+      [themeBreakpointsDown["md"]]: {
+        width: "100%",
       },
     },
   })

@@ -7,6 +7,7 @@ import commentReducer from "./comment/comment.reducer";
 import userReducer from "./user/user.reducer";
 import tagReducer from "./tag/tag.reducer";
 import pageReducer from "./page/page.reducer";
+import { createWrapper } from "next-redux-wrapper";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -21,4 +22,7 @@ const rootReducer = combineReducers({
 export type IRootState = ReturnType<typeof rootReducer>;
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+
+const makeStore = () => store;
+export const wrapper = createWrapper(makeStore);
 export default store;

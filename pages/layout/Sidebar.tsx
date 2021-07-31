@@ -13,15 +13,12 @@ import { ChevronLeft } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import {
-  themeBreakpointsDown,
-  themeBreakpointsUp,
-} from "../../components/theme";
 import { IRootState } from "../../redux";
 import categoryAction from "../../redux/category/category.action";
 import categoryApi from "../../redux/category/category.api";
 import { ICategory } from "../../redux/category/category.interface";
 import pageAction from "../../redux/page/page.action";
+import { themeBreakpointsDown } from "../../components/theme";
 
 const mapStateToProps = (state: IRootState) => ({
   isShowDrawer: state.page.sidebar.isShowDrawer,
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => {
       // [themeBreakpointsDown["sm"]]: {
       //   display: "none",
       // },
-      [theme.breakpoints.down("sm")]: {
+      [themeBreakpointsDown["sm"]]: {
         display: "none",
       },
     },
@@ -57,10 +54,17 @@ const useStyles = makeStyles((theme: Theme) => {
       // [themeBreakpointsDown["xs"]]: {
       //   display: "none",
       // },
-      [theme.breakpoints.up("md")]: {
-        display: "none",
+      display: "none",
+      // [theme.breakpoints.down("sm")]: {
+      //   display: "block",
+      // },
+      // [theme.breakpoints.down("xs")]: {
+      //   display: "none",
+      // },
+      [themeBreakpointsDown["sm"]]: {
+        display: "block",
       },
-      [theme.breakpoints.down("xs")]: {
+      [themeBreakpointsDown["xs"]]: {
         display: "none",
       },
     },
@@ -90,8 +94,12 @@ const useStyles = makeStyles((theme: Theme) => {
       // [themeBreakpointsUp["sm"]]: {
       //   display: "none",
       // },
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      display: "none",
+      // [theme.breakpoints.down("sm")]: {
+      //   display: "block",
+      // },
+      [themeBreakpointsDown["sm"]]: {
+        display: "block",
       },
     },
     drawerContainer: {
@@ -115,12 +123,14 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
   const classes = useStyles();
   const {
     isShowDrawer,
-    categoryList = [],
+    categoryList: propsCategoryList,
     sidebarActiveKey,
     defaultCategoryList,
     setPageState,
   } = props;
 
+  console.log("categoryList", propsCategoryList);
+  let categoryList: ICategory[] = propsCategoryList || [];
   const sideList = categoryList.concat(defaultCategoryList);
 
   const onCloseDrawer = () => {
@@ -235,6 +245,7 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
 export default connector(Sidebar);
 
 export async function getStaticProps() {
+  console.log("get static props");
   const response = await categoryApi.getList({
     page: 1,
     pageSize: 30,

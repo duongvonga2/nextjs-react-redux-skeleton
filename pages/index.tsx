@@ -7,7 +7,6 @@ import {
 import { create } from "jss";
 import jssExtend from "jss-plugin-extend";
 import { Provider } from "react-redux";
-import {} from "next/router";
 import store from "../redux/store";
 import { AppTheme } from "../components/theme";
 import Layout from "./layout/Layout";
@@ -21,7 +20,7 @@ const jss = create({
 });
 
 const generateClassName = createGenerateClassName();
-export default function Home() {
+function Home() {
   return (
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <Provider store={store}>
@@ -32,3 +31,5 @@ export default function Home() {
     </StylesProvider>
   );
 }
+
+export default Home;

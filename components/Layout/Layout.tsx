@@ -2,6 +2,7 @@ import { Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { themeBreakpointsDown } from "../../components/theme";
+import Header from "./Header";
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -54,6 +55,7 @@ const Layout = (props: IProps) => {
         className={classes.navBar}
       >
         {/* <Header /> */}
+        <Header />
       </Grid>
       <Grid
         item
