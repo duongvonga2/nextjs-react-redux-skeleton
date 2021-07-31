@@ -19,6 +19,8 @@ import categoryApi from "../../redux/category/category.api";
 import { ICategory } from "../../redux/category/category.interface";
 import pageAction from "../../redux/page/page.action";
 import { themeBreakpointsDown } from "../../components/theme";
+import Image from "next/image";
+import { getFileUrl } from "../../commons";
 
 const mapStateToProps = (state: IRootState) => ({
   isShowDrawer: state.page.sidebar.isShowDrawer,
@@ -27,7 +29,6 @@ const mapStateToProps = (state: IRootState) => ({
 });
 const mapDispatchToProps = {
   setPageState: pageAction.setState,
-  getCategoryList: categoryAction.getList,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -109,7 +110,7 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
 
   console.log("categoryList", propsCategoryList);
   let categoryList: ICategory[] = propsCategoryList || [];
-  const sideList = categoryList.concat(defaultCategoryList);
+  const sideList = defaultCategoryList.concat(categoryList);
 
   const onCloseDrawer = () => {
     setPageState({ "sidebar.isShowDrawer": false });
@@ -166,7 +167,7 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
                       sidebarActiveKey === item._id ? classes.activeItem : ""
                     }
                   >
-                    <Icon>{item.icon}</Icon>
+                    <Icon>{item.image || item.icon}</Icon>
                   </ListItemIcon>
                   <ListItemText primary={item.title} />
                 </ListItem>
