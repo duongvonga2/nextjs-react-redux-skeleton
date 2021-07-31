@@ -1,8 +1,13 @@
 import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
-import lightBlue from "@material-ui/core/colors/lightBlue";
-import red from "@material-ui/core/colors/red";
-import { createTheme } from "@material-ui/core";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { TGridName } from "./theme.interface";
+import {
+  themeBreakpointsDown,
+  themeBreakpointsUp,
+  lightBlue,
+  red,
+} from "./themeConfig";
 
 const lightText = {
   primary: "rgb(17, 24, 39)",
@@ -32,6 +37,10 @@ const state = {
     },
     error: red,
   },
+  // breakpoints: {
+  //   up: (grid: TGridName) => themeBreakpointsUp[grid],
+  //   down: (grid: TGridName) => themeBreakpointsDown[grid],
+  // },
   status: {
     danger: "orange",
   },
@@ -42,7 +51,8 @@ const state = {
 };
 export type ITheme = typeof state;
 
-const mainTheme = createTheme(state as any);
+let mainTheme = createTheme(state as any);
+// mainTheme = responsiveFontSizes(mainTheme)
 
 export const AppTheme = (props: any) => {
   return <ThemeProvider theme={mainTheme}>{props.children}</ThemeProvider>;

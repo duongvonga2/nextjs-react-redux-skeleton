@@ -5,7 +5,7 @@ export const Types = {
   setState: "page.setState",
 };
 
-const setState = (state: Partial<IPageState>) =>
+const setState = (state: Record<string, any>) =>
   createAction(Types.setState, { stateName: state });
 
 export default {

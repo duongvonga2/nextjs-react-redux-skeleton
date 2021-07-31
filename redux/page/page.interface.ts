@@ -1,5 +1,6 @@
 export interface IPageState {
   sidebar: {
-    isShowDrawer: boolean;
+    isShowDrawer?: boolean;
+    activeKey?: string;
   };
 }

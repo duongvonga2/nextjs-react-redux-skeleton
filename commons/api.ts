@@ -1,3 +1,5 @@
+import { IApiResponse, IFetchData } from "./interface";
+import FormData from "form-data";
 class Api {
   token = "";
   host = "";
@@ -34,11 +36,25 @@ class Api {
     return data;
   }
 
-  async fetchData(
-    api: string,
-    method = "GET",
-    body: any | undefined = undefined
-  ) {
+  async fetchData<T>(request: IFetchData): Promise<IApiResponse<T>> {
+    const {
+      api: requestApi,
+      method = "GET",
+      body: requestBody,
+      query,
+    } = request;
+    let api = requestApi;
+
+    if (query) {
+      const queryString = this.formatQuery(query);
+      api + queryString;
+    }
+
+    const body =
+      requestBody instanceof FormData
+        ? requestBody
+        : JSON.stringify(requestBody);
+
     if (!api.includes(this.host)) {
       api = this.host + api;
     }
@@ -80,4 +96,4 @@ class Api {
   }
 }
 
-export const AppApi = new Api(process.env.BACKEND_HOST);
+export const AppApi = new Api(process.env.REACT_APP_BACKEND_HOST);
