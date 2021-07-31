@@ -67,20 +67,7 @@ const Layout = (props: IProps) => {
         className={classes.rootContainer}
       >
         <Grid container className={classes.container}>
-          <Grid item lg={3} xl={2} md={3} sm={12} className={classes.sidebar}>
-            {/* <Sidebar /> */}
-          </Grid>
-          <Grid
-            item
-            lg={9}
-            xl={10}
-            md={9}
-            sm={12}
-            xs={12}
-            className={classes.content}
-          >
-            {props.children}
-          </Grid>
+          {props.children}
         </Grid>
       </Grid>
     </Grid>

@@ -13,7 +13,7 @@ import jssExtend from "jss-plugin-extend";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import { AppTheme } from "../components/theme";
-import Layout from "./layout/Layout";
+import Layout from "../components/Layout/Layout";
 
 const jss = create({
   ...jssPreset(),

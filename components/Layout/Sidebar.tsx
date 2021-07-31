@@ -40,27 +40,12 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => {
   return {
     sidebar: {
-      // [themeBreakpointsDown["sm"]]: {
-      //   display: "none",
-      // },
       [themeBreakpointsDown["sm"]]: {
         display: "none",
       },
     },
     topBar: {
-      // [themeBreakpointsUp["md"]]: {
-      //   display: "none",
-      // },
-      // [themeBreakpointsDown["xs"]]: {
-      //   display: "none",
-      // },
       display: "none",
-      // [theme.breakpoints.down("sm")]: {
-      //   display: "block",
-      // },
-      // [theme.breakpoints.down("xs")]: {
-      //   display: "none",
-      // },
       [themeBreakpointsDown["sm"]]: {
         display: "block",
       },
@@ -69,7 +54,6 @@ const useStyles = makeStyles((theme: Theme) => {
       },
     },
     horizon: {
-      // height: "75px",
       width: "100%",
       display: "block",
       whiteSpace: "nowrap",
@@ -91,13 +75,7 @@ const useStyles = makeStyles((theme: Theme) => {
       color: theme.palette.secondary.dark,
     },
     drawer: {
-      // [themeBreakpointsUp["sm"]]: {
-      //   display: "none",
-      // },
       display: "none",
-      // [theme.breakpoints.down("sm")]: {
-      //   display: "block",
-      // },
       [themeBreakpointsDown["sm"]]: {
         display: "block",
       },
@@ -243,21 +221,3 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
   );
 };
 export default connector(Sidebar);
-
-export async function getStaticProps() {
-  console.log("get static props");
-  const response = await categoryApi.getList({
-    page: 1,
-    pageSize: 30,
-    status: "active",
-  });
-  let categoryList: ICategory[] = [];
-  if (response.success && response.data) {
-    categoryList = response.data;
-  }
-  return {
-    props: {
-      categoryList,
-    },
-  };
-}
