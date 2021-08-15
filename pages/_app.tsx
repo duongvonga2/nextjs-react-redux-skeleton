@@ -11,7 +11,7 @@ import jssExtend from "jss-plugin-extend";
 import { Provider } from "react-redux";
 import store from "../src/redux/store";
 import { AppTheme } from "../src/components/theme";
-import Layout from "../src/components/Layout/Layout";
+import { ProtectRoutes } from "../src/components/Layout";
 
 const jss = create({
   ...jssPreset(),
@@ -20,14 +20,14 @@ const jss = create({
 
 const generateClassName = createGenerateClassName();
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps, router }: AppProps) => {
   return (
     <StylesProvider jss={jss} generateClassName={generateClassName}>
       <Provider store={store}>
         <AppTheme>
-          <Layout>
+          <ProtectRoutes router={router}>
             <Component {...pageProps} />
-          </Layout>
+          </ProtectRoutes>
         </AppTheme>
       </Provider>
     </StylesProvider>

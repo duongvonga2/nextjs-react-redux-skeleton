@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { themeBreakpointsDown } from "../src/components/theme";
 import { Grid, Theme } from "@material-ui/core";
-import Sidebar from "../src/components/Layout/Sidebar";
 
 interface IProps {}
 
@@ -41,22 +40,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 function Home(props: IProps) {
   const classes = useStyles();
-  return (
-    <>
-      <Grid item lg={3} xl={2} md={3} sm={12} className={classes.sidebar}>
-        <Sidebar />
-      </Grid>
-      <Grid
-        item
-        lg={9}
-        xl={10}
-        md={9}
-        sm={12}
-        xs={12}
-        className={classes.content}
-      ></Grid>
-    </>
-  );
+  return <Grid container className={classes.content}></Grid>;
 }
 
 export default Home;

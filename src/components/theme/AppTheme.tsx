@@ -45,7 +45,9 @@ const state = {
     danger: "orange",
   },
   typography: {
-    fontFamily: ["Roboto", '"Helvetica"', "Arial", "sans-serif"].join(","),
+    fontFamily: ["Nunito", "Roboto", '"Helvetica"', "Arial", "sans-serif"].join(
+      ","
+    ),
     fontSize: 12,
   },
 };

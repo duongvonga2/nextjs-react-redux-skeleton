@@ -1,6 +1,8 @@
 import { Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { IRootState } from "../../redux";
 import { ShowMessage } from "../commons";
 import { themeBreakpointsDown } from "../theme";
 import Header from "./Header";
@@ -42,8 +44,16 @@ interface IProps {
   children?: React.ReactElement;
 }
 
-const Layout = (props: IProps) => {
+const mapStateToProps = (state: IRootState) => ({
+  isLogin: state.auth.isLogin,
+});
+const mapDispatchToProps = {};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Layout = (props: IProps & PropsFromRedux) => {
   const classes = useStyles();
+  const { isLogin } = props;
   return (
     <Grid container>
       <Grid
@@ -54,8 +64,8 @@ const Layout = (props: IProps) => {
         xl={12}
         xs={12}
         className={classes.navBar}
+        style={isLogin ? {} : { display: "none" }}
       >
-        {/* <Header /> */}
         <Header />
       </Grid>
       <Grid
@@ -75,4 +85,4 @@ const Layout = (props: IProps) => {
     </Grid>
   );
 };
-export default Layout;
+export default connector(Layout);

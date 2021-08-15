@@ -1,31 +1,27 @@
 import React from "react";
 import { alpha, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-// import AuthHeader from "./AuthHeader";
-import UnAuthHeader from "./UnAuthHeader";
 import pageAction from "../../redux/page/page.action";
 import { connect, ConnectedProps } from "react-redux";
 import { IRootState } from "../../redux";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { themeBreakpointsDown } from "../theme";
+import Image from "next/image";
+import path from "path";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
-      flexGrow: 1,
-      // display: "flex",
-      // background: theme.palette.primary.main,
+      // flexGrow: 1,
+      padding: "15px 10px",
     },
     container: {
-      maxWidth: "1070px",
+      maxWidth: "1360px",
       margin: "auto",
       width: "100%",
+      display: "flex",
+      background: "#fff",
+      borderRadius: "5px",
       // padding: "16px",
     },
     toolBar: {
@@ -106,40 +102,16 @@ function PrimarySearchAppBar(props: PropsFromRedux) {
   const { setPageState } = props;
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
-        <div className={classes.container}>
-          <Toolbar className={classes.toolBar}>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => {
-                setPageState({ "sidebar.isShowDrawer": true });
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
-              TaGiVi
-            </Typography>
-
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
-            <UnAuthHeader />
-          </Toolbar>
+      <AppBar position="static" className={classes.container}>
+        <div
+          style={{ margin: "auto", marginTop: "32px", marginBottom: "66px" }}
+        >
+          <Image
+            width={100}
+            height={100}
+            src={path.resolve(__dirname, "../../../images/logos/main.png")}
+            alt="logo"
+          />
         </div>
       </AppBar>
     </div>

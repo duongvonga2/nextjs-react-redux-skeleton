@@ -1,9 +1,14 @@
 import { IAuthState } from "./auth.interface";
 
-const authInitialState: IAuthState = {
+const state: IAuthState = {
   isFetching: false,
   message: "",
   isLogin: false,
-  userInfo: {},
+  userInfo: null,
+  loginForm: {
+    email: "",
+    password: "",
+    errors: {},
+  },
 };
-export default authInitialState;
+export default state;
