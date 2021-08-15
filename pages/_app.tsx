@@ -1,6 +1,4 @@
 import "../styles/globals.css";
-// import type { AppProps } from "next/app";
-import App from "next/app";
 import { wrapper } from "../redux";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import {
@@ -35,11 +33,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Provider>
     </StylesProvider>
   );
-};
-
-MyApp.getInitialProps = async (appContext: any): Promise<any> => {
-  const appProps = await App.getInitialProps(appContext);
-  return { ...appProps };
 };
 
 export default wrapper.withRedux(MyApp);
