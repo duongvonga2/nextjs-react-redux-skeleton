@@ -1,7 +1,8 @@
 import { Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { themeBreakpointsDown } from "../../components/theme";
+import { ShowMessage } from "../commons";
+import { themeBreakpointsDown } from "../theme";
 import Header from "./Header";
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -69,6 +70,7 @@ const Layout = (props: IProps) => {
         <Grid container className={classes.container}>
           {props.children}
         </Grid>
+        <ShowMessage />
       </Grid>
     </Grid>
   );

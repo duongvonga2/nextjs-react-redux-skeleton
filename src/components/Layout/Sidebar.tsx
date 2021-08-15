@@ -4,28 +4,19 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
   Theme,
 } from "@material-ui/core";
-import Icon from "@material-ui/core/Icon";
 import { ChevronLeft } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { IRootState } from "../../redux";
-import categoryAction from "../../redux/category/category.action";
-import categoryApi from "../../redux/category/category.api";
-import { ICategory } from "../../redux/category/category.interface";
 import pageAction from "../../redux/page/page.action";
-import { themeBreakpointsDown } from "../../components/theme";
-import Image from "next/image";
-import { getFileUrl } from "../../commons";
+import { themeBreakpointsDown } from "../theme";
 
 const mapStateToProps = (state: IRootState) => ({
   isShowDrawer: state.page.sidebar.isShowDrawer,
   sidebarActiveKey: state.page.sidebar.activeKey,
-  defaultCategoryList: state.category.defaultList,
 });
 const mapDispatchToProps = {
   setPageState: pageAction.setState,
@@ -35,9 +26,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type IPropsFromRedux = ConnectedProps<typeof connector>;
 
-interface IProps {
-  categoryList?: ICategory[];
-}
+interface IProps {}
 const useStyles = makeStyles((theme: Theme) => {
   return {
     sidebar: {
@@ -100,21 +89,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const Sidebar = (props: IProps & IPropsFromRedux) => {
   const classes = useStyles();
-  const {
-    isShowDrawer,
-    categoryList: propsCategoryList,
-    sidebarActiveKey,
-    defaultCategoryList,
-    setPageState,
-  } = props;
-
-  console.log("categoryList", propsCategoryList);
-  let categoryList: ICategory[] = propsCategoryList || [];
-  const sideList = defaultCategoryList.concat(categoryList);
-
-  const onCloseDrawer = () => {
-    setPageState({ "sidebar.isShowDrawer": false });
-  };
+  const { isShowDrawer, sidebarActiveKey, setPageState } = props;
 
   const ItemList = ({ horizon = true }: { horizon: boolean }) => {
     return (
@@ -134,46 +109,6 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
               Viết bài viết mới
             </Button>
           </ListItem>
-          {sideList.map((item, index) => {
-            return (
-              <div
-                style={
-                  horizon
-                    ? {
-                        display: "inline-block",
-                      }
-                    : {}
-                }
-                key={item._id}
-              >
-                <ListItem
-                  button
-                  key={item._id}
-                  className={` ${horizon ? classes.horizonListItem : ""} ${
-                    sidebarActiveKey === item._id ? classes.activeItem : ""
-                  }`}
-                  // selected={sidebarActiveKey === item._id}
-                  onClick={() =>
-                    setPageState({ "sidebar.activeKey": item._id })
-                  }
-                >
-                  <ListItemIcon
-                    style={{
-                      width: "auto",
-                      minWidth: "20px",
-                      marginRight: "15px",
-                    }}
-                    className={
-                      sidebarActiveKey === item._id ? classes.activeItem : ""
-                    }
-                  >
-                    <Icon>{item.image || item.icon}</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary={item.title} />
-                </ListItem>
-              </div>
-            );
-          })}
         </>
       </List>
     );
@@ -203,14 +138,10 @@ const Sidebar = (props: IProps & IPropsFromRedux) => {
       <div className={classes.topBar}>
         <Horizon />
       </div>
-      <Drawer
-        open={isShowDrawer}
-        onClose={onCloseDrawer}
-        className={classes.drawer}
-      >
+      <Drawer open={isShowDrawer} className={classes.drawer}>
         <div className={classes.drawerContainer}>
           <div className={classes.drawerHeader}>
-            <IconButton onClick={onCloseDrawer}>
+            <IconButton>
               <ChevronLeft />
             </IconButton>
           </div>

@@ -5,5 +5,10 @@ const state: IPageState = {
     isShowDrawer: false,
     activeKey: "0",
   },
+  messageShowing: {
+    message: "",
+    variant: "default",
+    anchorOrigin: null,
+  },
 };
 export default state;

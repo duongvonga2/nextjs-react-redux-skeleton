@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { wrapper } from "../redux";
+import { wrapper } from "../src/redux";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import {
   StylesProvider,
@@ -9,14 +9,13 @@ import {
 import { create } from "jss";
 import jssExtend from "jss-plugin-extend";
 import { Provider } from "react-redux";
-import store from "../redux/store";
-import { AppTheme } from "../components/theme";
-import Layout from "../components/Layout/Layout";
+import store from "../src/redux/store";
+import { AppTheme } from "../src/components/theme";
+import Layout from "../src/components/Layout/Layout";
 
 const jss = create({
   ...jssPreset(),
   plugins: [...jssPreset().plugins, jssExtend()],
-  // insertionPoint: document.getElementById("jss-insertion-point") || undefined,
 });
 
 const generateClassName = createGenerateClassName();

@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import UnAuthHeader from "./UnAuthHeader";
 import pageAction from "../../redux/page/page.action";
 import { connect, ConnectedProps } from "react-redux";
-import { IRootState, wrapper } from "../../redux";
+import { IRootState } from "../../redux";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { themeBreakpointsDown } from "../theme";
 
