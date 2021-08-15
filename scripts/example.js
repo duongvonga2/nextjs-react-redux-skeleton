@@ -10,17 +10,35 @@ const getCamelCase = (folderName, upperFirst = true) => {
   return name;
 };
 
-const actionExample = (folderName) => `
+const actionExample = (folderName) => {
+  const name = getCamelCase(folderName);
+  const lowerNameFirst = getCamelCase(folderName, false);
+  return `
+import { Dispatch } from "redux";
 import { createAction } from "../common";
-import ${folderName}Api from "./${folderName}.api";
+import ${lowerNameFirst}Api from "./${folderName}.api";
+import { I${name}State } from "./${folderName}.interface";
 
 export const Types = {
-  setState: "${folderName}.setState",
+  setState: "${lowerNameFirst}.setState",
+  cleanAll: "${lowerNameFirst}.cleanAll",
+  resetState: "${lowerNameFirst}.resetState",
 };
 
-export default {};
+const setState = (state: Record<string, any>) =>
+  createAction(Types.setState, { state });
+const resetState = (stateName: keyof I${name}State) =>
+  createAction(Types.resetState, { stateName });
+const cleanAll = () => createAction(Types.cleanAll);
+
+export default {
+  setState,
+  resetState,
+  cleanAll
+};
 
 `;
+};
 
 const apiExample = (folderName) => `
 import { AppApi } from "../../commons";
@@ -55,21 +73,41 @@ export interface I${name}State {
 
 const reducerExample = (folderName) => {
   const name = getCamelCase(folderName);
+  const lowerNameFirst = getCamelCase(folderName, false);
+
   return `
   import produce from "immer";
 import { IAction } from "../common";
-import ${folderName}InitialState from "./${folderName}.initial-state";
+import ${lowerNameFirst}InitialState from "./${folderName}.initial-state";
 import { I${name}State } from "./${folderName}.interface";
+import _ from "lodash";
+import { Types } from "./${folderName}.action";
 
 export default produce((state: I${name}State, action: IAction) => {
   const data = action.data;
   const message = action.message;
   switch (action.type) {
+    case Types.setState: {
+      const updatedState = data.state;
+      for (const key in updatedState) {
+        _.set(state, key, updatedState[key]);
+      }
+      return state;
+    }
+    case Types.resetState: {
+      const stateName: keyof I${name}State = data.stateName;
+      _.set(state, stateName, ${lowerNameFirst}InitialState[stateName]);
+      return state;
+    }
+    case Types.cleanAll: {
+      return ${lowerNameFirst}InitialState;
+    }
+
     default: {
       return state;
     }
   }
-}, ${folderName}InitialState);
+}, ${lowerNameFirst}InitialState);
 `;
 };
 
@@ -80,8 +118,25 @@ const indexExample = (folderName) => {
   export * from "./${folderName}.initial-state";
   export * from "./${folderName}.interface";
   export * from "./${folderName}.reducer";
+  export * from "./${folderName}.validator";
 
   `;
+};
+
+const validatorExample = (folderName) => {
+  const name = getCamelCase(folderName);
+  return `
+  import {  } from "class-validator";
+  import {  } from "./${folderName}.interface";
+  
+  export class Create${name}Validator {
+    constructor() {
+      
+    }
+
+  }
+  
+`;
 };
 
 module.exports = {
@@ -91,4 +146,5 @@ module.exports = {
   initialStateExample,
   reducerExample,
   indexExample,
+  validatorExample,
 };

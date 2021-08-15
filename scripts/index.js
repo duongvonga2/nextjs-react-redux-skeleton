@@ -7,6 +7,7 @@ const {
   initialStateExample,
   interfaceExample,
   reducerExample,
+  validatorExample,
 } = require("./example");
 
 const fileList = [
@@ -16,6 +17,7 @@ const fileList = [
   "interface.ts",
   "index.ts",
   "reducer.ts",
+  "validator.ts",
 ];
 
 const getExample = (afterFixName, folderName) => {
@@ -38,6 +40,9 @@ const getExample = (afterFixName, folderName) => {
     case "reducer.ts": {
       return reducerExample(folderName);
     }
+    case "validator.ts": {
+      return validatorExample(folderName);
+    }
     default:
       "";
   }
@@ -53,7 +58,7 @@ const getExample = (afterFixName, folderName) => {
       fs.mkdirSync(path);
     }
     fileList.forEach((name) => {
-      const fileName = folderName + "." + name;
+      const fileName = name !== "index.ts" ? folderName + "." + name : name;
       const filePath = path + "/" + fileName;
       if (fs.existsSync(filePath)) {
         return;
