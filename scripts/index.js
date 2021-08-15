@@ -53,7 +53,7 @@ const getExample = (afterFixName, folderName) => {
   for (const index in folderNameList) {
     const folderName = folderNameList[index];
 
-    const path = pathProp.resolve(__dirname, "../redux", folderName);
+    const path = pathProp.resolve(__dirname, "../src/redux", folderName);
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path);
     }
