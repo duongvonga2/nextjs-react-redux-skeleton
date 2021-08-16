@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import userReducer from "./user/user.reducer";
 import pageReducer from "./page/page.reducer";
 import { createWrapper } from "next-redux-wrapper";
+import confessionReducer from "./confession/confession.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   page: pageReducer,
+  confession: confessionReducer,
 });
 
 export type IRootState = ReturnType<typeof rootReducer>;

@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const mapStateToProps = (state: IRootState) => ({
   authFetchingFetching: state.auth.isFetching,
+  confessionFetching: state.confession.isFetching,
 });
 const mapDispatchToProps = {};
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -46,8 +47,8 @@ function Spinning(props: PropsFromRedux & IProps) {
   const classes = useStyles();
   const [progress, setProgress] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
-  const { authFetchingFetching } = props;
-  const loading = authFetchingFetching;
+  const { authFetchingFetching, confessionFetching } = props;
+  const loading = authFetchingFetching || confessionFetching;
 
   useEffect(() => {
     let timer: any = 0;

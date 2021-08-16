@@ -148,7 +148,7 @@ const Login = (props: PropsFromRedux) => {
                 helperText={errors.password}
               />
 
-              <Typography
+              {/* <Typography
                 style={{
                   fontStyle: "normal",
                   fontWeight: "bold",
@@ -159,7 +159,7 @@ const Login = (props: PropsFromRedux) => {
                 }}
               >
                 Quên mật khẩu
-              </Typography>
+              </Typography> */}
               <div
                 style={{
                   display: "flex",

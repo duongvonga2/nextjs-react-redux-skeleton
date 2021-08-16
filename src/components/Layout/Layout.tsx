@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => {
     topSidebar: {
       height: "75px",
       width: "100%",
-      background: theme.palette.secondary.light,
+      // background: theme.palette.secondary.light,
       display: "none",
       [themeBreakpointsDown["md"]]: {
         display: "block",
@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     content: {
       minHeight: "calc(100vh - 140px)",
-      background: theme.palette.secondary.main,
+      // background: theme.palette.secondary.main,
     },
     rootContainer: {
       display: "flex",
     },
     container: {
-      maxWidth: "1070px",
+      maxWidth: "1360px",
       margin: "auto",
     },
   };

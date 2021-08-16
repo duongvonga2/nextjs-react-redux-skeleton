@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { AppApi, saveData, validateData } from "../../commons";
+import { AppApi, removeData, saveData, validateData } from "../../commons";
 import { createAction } from "../common";
 import { IRootState } from "../store";
 import authApi from "./auth.api";
@@ -52,9 +52,15 @@ const adminLogin =
     });
   };
 
+const logOut = () => (dispatch: Dispatch) => {
+  dispatch(setState({ isLogin: false }));
+  removeData("appUser");
+};
+
 export default {
   setState,
   resetState,
   cleanAll,
   adminLogin,
+  logOut,
 };

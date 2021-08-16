@@ -8,6 +8,8 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { themeBreakpointsDown } from "../theme";
 import Image from "next/image";
 import path from "path";
+import { CustomizedButton } from "../commons";
+import authAction from "../../redux/auth/auth.action";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,16 +95,21 @@ const useStyles = makeStyles((theme: Theme) =>
 const mapStateToProps = (state: IRootState) => ({});
 const mapDispatchToProps = {
   setPageState: pageAction.setState,
+  logOut: authAction.logOut,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function PrimarySearchAppBar(props: PropsFromRedux) {
   const classes = useStyles();
-  const { setPageState } = props;
+  const { logOut } = props;
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.container}>
+      <AppBar
+        position="static"
+        className={classes.container}
+        style={{ position: "relative" }}
+      >
         <div
           style={{ margin: "auto", marginTop: "32px", marginBottom: "66px" }}
         >
@@ -113,6 +120,17 @@ function PrimarySearchAppBar(props: PropsFromRedux) {
             alt="logo"
           />
         </div>
+        <CustomizedButton
+          style={{
+            width: "auto",
+            position: "absolute",
+            right: "5px",
+            top: "5px",
+          }}
+          onClick={() => logOut()}
+        >
+          Logout
+        </CustomizedButton>
       </AppBar>
     </div>
   );
