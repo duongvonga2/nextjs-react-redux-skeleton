@@ -19,5 +19,8 @@ export interface IAdmin {
   email: string;
   firstName: string;
   lastName: string;
+}
+
+export interface ILoginResponse extends IAdmin {
   token: string;
 }

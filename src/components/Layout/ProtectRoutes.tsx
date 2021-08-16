@@ -18,6 +18,8 @@ const Protect = (
   const router = useRouter();
   const { children, isLogin, router: propsRouter } = props;
   useEffect(() => {
+    console.log("props Router", propsRouter.route);
+    console.log("isLogin", isLogin);
     if (!isLogin) {
       const unAuthRouteList = Object.values(unAuthRoutes);
       if (!unAuthRouteList.includes(propsRouter.route)) {
@@ -29,8 +31,7 @@ const Protect = (
         router.push(authRoutes.index);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogin]);
+  }, [isLogin, router, propsRouter]);
 
   return <Layout>{children}</Layout>;
 };

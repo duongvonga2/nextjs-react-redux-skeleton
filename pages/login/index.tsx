@@ -90,7 +90,11 @@ const Login = (props: PropsFromRedux) => {
 
   const onLogin = (event: any) => {
     event.preventDefault();
-    login({ email, password });
+    login({ email, password }).then((success) => {
+      if (success) {
+        setAuthState({ "loginForm.email": "", "loginForm.password": "" });
+      }
+    });
   };
 
   return (

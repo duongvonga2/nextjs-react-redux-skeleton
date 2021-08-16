@@ -6,6 +6,7 @@ import { IRootState } from "../../redux";
 import { ShowMessage } from "../commons";
 import { themeBreakpointsDown } from "../theme";
 import Header from "./Header";
+import { Loading } from "./Loading";
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -55,34 +56,36 @@ const Layout = (props: IProps & PropsFromRedux) => {
   const classes = useStyles();
   const { isLogin } = props;
   return (
-    <Grid container>
-      <Grid
-        item
-        sm={12}
-        md={12}
-        lg={12}
-        xl={12}
-        xs={12}
-        className={classes.navBar}
-        style={isLogin ? {} : { display: "none" }}
-      >
-        <Header />
-      </Grid>
-      <Grid
-        item
-        sm={12}
-        md={12}
-        lg={12}
-        xl={12}
-        xs={12}
-        className={classes.rootContainer}
-      >
-        <Grid container className={classes.container}>
-          {props.children}
+    <Loading>
+      <Grid container>
+        <Grid
+          item
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          xs={12}
+          className={classes.navBar}
+          style={isLogin ? {} : { display: "none" }}
+        >
+          <Header />
         </Grid>
-        <ShowMessage />
+        <Grid
+          item
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          xs={12}
+          className={classes.rootContainer}
+        >
+          <Grid container className={classes.container}>
+            {props.children}
+          </Grid>
+          <ShowMessage />
+        </Grid>
       </Grid>
-    </Grid>
+    </Loading>
   );
 };
 export default connector(Layout);
