@@ -36,12 +36,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textField: {
     // position: "static",
+    "& input": {
+      width: "100%",
+      background: "#f8f8f8",
+      boxShadow:
+        "inset -8px -8px 16px rgba(255, 255, 255, 0.25), inset 8px 8px 16px #E8E8E8",
+      borderRadius: "20px",
+      // flex: "none",
+    },
     width: "100%",
-    background: "#f8f8f8",
-    boxShadow:
-      "inset -8px -8px 16px rgba(255, 255, 255, 0.25), inset 8px 8px 16px #E8E8E8",
-    borderRadius: "20px",
-    flex: "none",
     order: 1,
     flexGrow: 0,
     margin: "10px 0px",
@@ -66,18 +69,30 @@ const mapStateToProps = (state: IRootState) => ({
 });
 const mapDispatchToProps = {
   setAuthState: authAction.setState,
+  login: authAction.adminLogin,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Login = (props: PropsFromRedux) => {
   const classes = useStyles();
-  const { loginForm, setAuthState } = props;
-  const { email, password } = loginForm;
+  const { loginForm, setAuthState, login } = props;
+  const { email, password, errors } = loginForm;
 
   const onInput = (key: keyof ILoginForm, value: string) => {
+    const newErrors: any = { ...errors };
+    if (newErrors[key]) {
+      delete newErrors[key];
+      setAuthState({ "loginForm.errors": { ...newErrors } });
+    }
     setAuthState({ ["loginForm." + key]: value });
   };
+
+  const onLogin = (event: any) => {
+    event.preventDefault();
+    login({ email, password });
+  };
+
   return (
     <div className={classes.root}>
       {" "}
@@ -92,7 +107,7 @@ const Login = (props: PropsFromRedux) => {
             />
           </Grid>
           <Grid item xl={6} lg={6} md={6} sm={6} className={classes.rightSide}>
-            <form>
+            <form onSubmit={onLogin}>
               <Typography
                 style={{
                   fontStyle: "normal",
@@ -113,6 +128,8 @@ const Login = (props: PropsFromRedux) => {
                 placeholder="Email"
                 variant="outlined"
                 onChange={(event) => onInput("email", event.target.value)}
+                error={!!errors.email}
+                helperText={errors.email}
               />
               <TextField
                 className={`${classes.textField} ${
@@ -123,6 +140,8 @@ const Login = (props: PropsFromRedux) => {
                 variant="outlined"
                 type="password"
                 onChange={(event) => onInput("password", event.target.value)}
+                error={!!errors.password}
+                helperText={errors.password}
               />
 
               <Typography
@@ -144,13 +163,7 @@ const Login = (props: PropsFromRedux) => {
                   justifyContent: "center",
                 }}
               >
-                <CustomizedButton
-                  onClick={() => {
-                    setAuthState({ isLogin: true });
-                  }}
-                >
-                  Đăng nhập
-                </CustomizedButton>
+                <CustomizedButton type="submit">Đăng nhập</CustomizedButton>
               </div>
             </form>
           </Grid>

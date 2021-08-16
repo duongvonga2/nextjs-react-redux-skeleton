@@ -1,14 +1,17 @@
 import { IApiResponse, IFetchData } from "./interface";
 import FormData from "form-data";
 class Api {
-  token = "";
-  host = "";
+  private token = "";
+  private host = "";
   constructor(host: any) {
     this.host = host;
   }
 
   setToken(token: string) {
     this.token = token;
+  }
+  getToken() {
+    return this.token;
   }
 
   formatQuery(query: any) {
@@ -23,7 +26,13 @@ class Api {
       )
         delete query[key];
       else if (typeof query[key] != "undefined") {
-        queryString += `${key}=${query[key]}&`;
+        if (query[key] instanceof Array) {
+          query[key].forEach((item: string, index: number) => {
+            queryString += `${key}[${index}]=${item}&`;
+          });
+        } else {
+          queryString += `${key}=${query[key]}&`;
+        }
       }
     }
     return queryString;
@@ -47,7 +56,7 @@ class Api {
 
     if (query) {
       const queryString = this.formatQuery(query);
-      api + queryString;
+      api = api + queryString;
     }
 
     const body =
@@ -55,11 +64,13 @@ class Api {
         ? requestBody
         : JSON.stringify(requestBody);
 
-    if (!api.includes(this.host)) {
+    if (
+      !api.includes(this.host) &&
+      !api.includes("https://") &&
+      !api.includes("http://")
+    ) {
       api = this.host + api;
     }
-    console.log("Method: ", method, "Api", api);
-    console.log("Body", body);
     try {
       const options: any = {
         method,
@@ -86,7 +97,7 @@ class Api {
         console.log("Response of", api, json);
         return { ...json, code: json.statusCode, success: response.ok };
       } catch (err) {
-        console.log("response ", response);
+        console.log("response error", err);
         throw err;
       }
     } catch (err) {
@@ -96,4 +107,4 @@ class Api {
   }
 }
 
-export const AppApi = new Api(process.env.REACT_APP_BACKEND_HOST);
+export const AppApi = new Api(process.env.BACKEND_HOST);

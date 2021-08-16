@@ -6,8 +6,18 @@ export interface IAuthState {
   loginForm: ILoginForm;
 }
 
-export interface ILoginForm {
+export interface ILoginForm extends ILogin {
+  errors: Record<string, any>;
+}
+export interface ILogin {
   email: string;
   password: string;
-  errors: Record<string, string>;
+}
+
+export interface IAdmin {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  token: string;
 }
